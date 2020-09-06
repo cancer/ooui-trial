@@ -2,10 +2,10 @@
   "extends": "@tsconfig/svelte",
   "compilerOptions": {
     "lib": ["es6", "dom"],
-    "types": ["node", "svelte"],
-    "baseUrl": "src/typings/",
-    "paths": {
-      "svelte-routing": ["svelte-routing/index.d.ts"]
-    }
-  }
+    "types": ["node", "svelte"]
+  },
+  "include": [
+    "svelte-env.d.ts",
+    "src/**/*"
+  ]
 }

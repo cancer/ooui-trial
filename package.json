@@ -40,6 +40,8 @@
   },
   "dependencies": {
     "svelte": "^3.24.0",
-    "svelte-routing": "1.4.2"
+    "svelte-awesome": "^2.3.0",
+    "svelte-routing": "1.4.2",
+    "ulid": "^2.3.0"
   }
 }

@@ -1,5 +1,5 @@
-import { makeDefaultMemo } from "../../domains/memo/memo";
-import type { Memo } from "../../domains/memo/memo";
+import { makeDefaultMemo } from "../../domains/memo";
+import type { Memo } from "../../domains/memo";
 import { dummyData } from "./make-dummy-data";
 import { update } from "./store";
 

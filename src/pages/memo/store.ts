@@ -1,5 +1,5 @@
 import { derived, writable } from "svelte/store";
-import type { Memo } from "../../domains/memo/memo";
+import type { Memo } from "../../domains/memo";
 
 interface State {
   memos: Memo[];

@@ -7,8 +7,17 @@ $spacing-lv6: 52px;
 $spacing-lv7: 84px;
 $spacing-lv8: 136px;
 
+$font-size-small: 12px;
 $font-size-basic: 16px;
 $font-size-large: 32px;
 
-$font-color-basic: #444;
-$font-color-danger: #CC3333;
+$color-basic: #444;
+$color-negative: #CC3333;
+$color-positive: #27AE60;
+
+$color-gray30: #4F5558;
+$color-gray50: #90979A;
+$color-gray90: #F0F2F2;
+
+$color-online: #27E3AB;
+$color-offline: $color-gray50;

@@ -32,7 +32,7 @@
       "collection single";
     grid-template-columns: 300px 1fr;
     grid-column-gap: $spacing-lv4;
-    color: $font-color-basic;
+    color: $color-basic;
     font-size: $font-size-basic;
     height: calc(100vh - 30px);
     overflow: hidden;
@@ -79,7 +79,7 @@
         margin-top: $spacing-lv1;
 
         .createButton {
-          color: $font-color-basic;
+          color: $color-basic;
           background: none;
           border: none;
           cursor: pointer;
@@ -100,7 +100,7 @@
 
         &:hover,
         &.current {
-          background-color: #eee;
+          background-color: $color-gray30;
         }
 
         .link {
@@ -138,13 +138,13 @@
         width: 100%;
         height: auto;
         font-size: $font-size-basic;
-        color: $font-color-basic;
+        color: $color-basic;
         border: none;
         margin-top: $spacing-lv5;
       }
 
       .deleteButton {
-        color: $font-color-danger;
+        color: $color-negative;
         background: none;
         border: none;
         cursor: pointer;

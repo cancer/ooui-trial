@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import Icon from "svelte-awesome";
-  import { search } from "svelte-awesome/icons";
+  import { search, trash, plus } from "svelte-awesome/icons";
 
   import type { Memo } from "../../domains/memo";
   import { memos, keyword, current } from "./store";
@@ -11,6 +11,8 @@
     fetchMemos,
     searchByKeyword,
     switchMemo,
+    deleteMemo,
+    createMemo,
   } from "./usecases";
 
   onMount(async () => {
@@ -70,16 +72,34 @@
 
     .collection {
       grid-area: collection;
-      height: 100vh;
-      overflow: scroll;
-      padding: 0;
+
+      .navigation {
+        display: flex;
+        flex-direction: row-reverse;
+        margin-top: $spacing-lv1;
+
+        .createButton {
+          color: $font-color-basic;
+          background: none;
+          border: none;
+          cursor: pointer;
+        }
+      }
+
+      .list {
+        height: 100vh;
+        overflow: scroll;
+        padding: 0;
+        margin: 0;
+      }
 
       .memo {
         list-style: none;
         padding-bottom: $spacing-lv1;
         border-bottom: 1px solid #ccc;
 
-        :hover {
+        &:hover,
+        &.current {
           background-color: #eee;
         }
 
@@ -108,6 +128,7 @@
       grid-area: single;
 
       .title {
+        width: auto;
         font-size: $font-size-large;
         margin-top: $spacing-lv5;
         border: none;
@@ -120,6 +141,13 @@
         color: $font-color-basic;
         border: none;
         margin-top: $spacing-lv5;
+      }
+
+      .deleteButton {
+        color: $font-color-danger;
+        background: none;
+        border: none;
+        cursor: pointer;
       }
     }
   }
@@ -136,19 +164,26 @@
       <Icon data={search} />
     </div>
   </div>
-  <ul class="collection">
-    {#each $memos as memo}
-      <li class="memo">
-        <a
-          on:click|preventDefault={() => switchMemo(memo)}
-          href="#"
-          class="link">
-          <h1 class="title">{memo.title}</h1>
-          <p class="content">{memo.content}</p>
-        </a>
-      </li>
-    {/each}
-  </ul>
+  <div class="collection">
+    <div class="navigation">
+      <button on:click={() => createMemo()} type="button" class="createButton">
+        <Icon data={plus} scale="1.5" />
+      </button>
+    </div>
+    <ul class="list">
+      {#each $memos as memo}
+        <li class="memo" class:current={$current !== null && memo.id === $current.id}>
+          <a
+            on:click|preventDefault={() => switchMemo(memo)}
+            href="#"
+            class="link">
+            <h1 class="title">{memo.title}</h1>
+            <p class="content">{memo.content}</p>
+          </a>
+        </li>
+      {/each}
+    </ul>
+  </div>
 
   {#if $current !== null}
     <div class="single">
@@ -156,6 +191,12 @@
         value={$current.title}
         on:blur={(ev) => editTitle(ev.currentTarget.value)}
         class="title" />
+      <button
+        on:click={() => window.confirm('Are you sure to delete this memo?') && deleteMemo($current)}
+        type="button"
+        class="deleteButton">
+        <Icon data={trash} scale="1.5" />
+      </button>
       <textarea
         value={$current.content}
         on:blur={(ev) => editContent(ev)}

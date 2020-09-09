@@ -1,3 +1,4 @@
+import { makeDefaultMemo } from "../../domains/memo/memo";
 import type { Memo } from "../../domains/memo/memo";
 import { dummyData } from "./make-dummy-data";
 import { update } from "./store";
@@ -60,5 +61,22 @@ export const searchByKeyword = (keyword: string): void => {
   update((state) => ({
     ...state,
     keyword,
+  }));
+};
+
+export const deleteMemo = (memo: Memo): void => {
+  update((state) => ({
+    ...state,
+    current: null,
+    memos: state.memos.filter((v) => v.id !== memo.id),
+  }));
+};
+
+export const createMemo = (): void => {
+  const newMemo = makeDefaultMemo();
+  update((state) => ({
+    ...state,
+    current: newMemo,
+    memos: [newMemo, ...state.memos],
   }));
 };
